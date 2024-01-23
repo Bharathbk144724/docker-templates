@@ -9,16 +9,31 @@ RUN apk add --no-cache git
 WORKDIR /src
 
 # build argument for framework
-ARG FRAMEWORK=04-GO/fiber
+ARG FRAMEWORK=04-GO/echo
 
 # copy go.mod and go.sum
-COPY fiber/go.mod fiber/go.sum ./
+COPY /$FRAMEWORK/go.mod /$FRAMEWORK/go.sum ./
 
 # download dependencies
 RUN go mod download
 
 # copy other files
-COPY $FRAMEWORK .
+COPY $FRAMEWORK $FRAMEWORK
 
 # build golang app
-RUN CGO_ENABLED=0 GO111MODULE=on go build -v -o /main -installsuffix cgo -ldflags="-w -s" ./*.go
+RUN CGO_ENABLED=0 GO111MODULE=on go build -v -o /main -installsuffix cgo -ldflags="-w -s" ./$FRAMEWORK/*.go
+
+# second stage
+FROM alpine
+
+# copy executable file
+COPY --from=builder main .
+
+# allow main to be executed
+RUN chmod +x /main
+
+# expose port 80
+EXPOSE 80
+
+# run app executeable file
+CMD ["./main"]
