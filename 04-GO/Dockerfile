@@ -12,7 +12,7 @@ WORKDIR /src
 ARG FRAMEWORK=echo
 
 # copy go.mod and go.sum
-COPY $FRAMEWORK/go.mod $FRAMEWORK/go.sum ./
+COPY echo/go.mod echo/go.sum ./
 
 # download dependencies
 RUN go mod download
