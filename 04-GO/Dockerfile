@@ -9,7 +9,7 @@ RUN apk add --no-cache git
 WORKDIR /src
 
 # build argument for framework
-ARG FRAMEWORK=fiber
+ARG FRAMEWORK=04-GO/fiber
 
 # copy go.mod and go.sum
 COPY fiber/go.mod fiber/go.sum ./
