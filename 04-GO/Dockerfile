@@ -1,6 +1,6 @@
 # builder stage
 # Use your custom Golang image from ECR
-FROM public.ecr.aws/k8l2c2v3/ubc-docker/golang:1.19-alpine as builder
+FROM public.ecr.aws/k8l2c2v3/ubc-docker:latest as builder
 
 # Installing Git for alpine
 RUN apk add --no-cache git
