@@ -9,7 +9,7 @@ RUN apk add --no-cache git
 WORKDIR /src
 
 # build argument for framework
-ARG FRAMEWORK=04-GO/echo
+ARG FRAMEWORK=echo
 
 # copy go.mod and go.sum
 COPY $FRAMEWORK/go.mod $FRAMEWORK/go.sum ./
